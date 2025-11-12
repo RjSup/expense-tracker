@@ -23,6 +23,10 @@ dist-ssr
 *.sln
 *.sw?
 
+*.txt
+
+.txt
+
 # Dependencies
 node_modules
 
