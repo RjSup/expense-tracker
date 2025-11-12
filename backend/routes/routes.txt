@@ -1,3 +1,0 @@
-connect the front end requests to controller functions
-
-example - router.get('/users', getUser)

@@ -1,3 +1,0 @@
-functions that call the backend api
-
-example - getUser(), login()

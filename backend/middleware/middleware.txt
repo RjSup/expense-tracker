@@ -1,3 +1,0 @@
-functions that sit between request and controller
-
-example - auth jwt check, error handling

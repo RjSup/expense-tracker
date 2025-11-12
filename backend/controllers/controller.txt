@@ -1,5 +1,0 @@
-The actual business logic
-
-example - getUser - createExpense
-
-called by routes

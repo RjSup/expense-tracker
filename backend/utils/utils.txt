@@ -1,3 +1,0 @@
-helper functions used accross controllers
-
-example - formatting dates, calculating tools

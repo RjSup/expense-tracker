@@ -1,8 +1,0 @@
--context and global states
-
-What: Global authentication state
-When to edit: To add user data
-
-authContext = user auth states
-
-themeContext - dark/light mode
