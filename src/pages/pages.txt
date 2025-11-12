@@ -1,0 +1,3 @@
+all pages needed for website
+
+homepage, loginpage, signuppage, dashboard page etc

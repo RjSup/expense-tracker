@@ -1,0 +1,7 @@
+ts type definitions as interfaces
+
+api.types.ts - api response type
+
+expense.type.ts - expense related types
+
+user.types.ts - user related types

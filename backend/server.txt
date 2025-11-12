@@ -1,0 +1,3 @@
+starts the server and loads environmental variables
+
+example - app.listen(port)

@@ -1,0 +1,56 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal {
+  background: rgba(30, 30, 30, 1);
+  padding: 2rem;
+  border-radius: 12px;
+  color: white;
+  width: 300px;
+  position: relative;
+}
+
+.modal h2 {
+  margin-bottom: 1rem;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal input {
+  margin-bottom: 0.8rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: none;
+  background-color: rgba(50, 50, 50, 1);
+  color: white;
+}
+
+.modal button[type="submit"] {
+  background-color: rgba(119, 158, 203, 1);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.8rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+}

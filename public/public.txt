@@ -1,0 +1,7 @@
+static assets
+
+icons
+
+logos
+
+etc

@@ -1,0 +1,3 @@
+database schemas or orm models
+
+example - user model that defines the user table/collection structure and operations

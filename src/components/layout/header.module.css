@@ -1,0 +1,92 @@
+/* Header container */
+.header {
+  background-color: rgba(255, 255, 255, 1); /* pure white */
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); /* subtle shadow for depth */
+}
+
+/* Logo / Title */
+.title {
+  color: rgba(119, 158, 203, 1); /* colored accent for title */
+  font-size: 1.2rem;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.title:hover {
+  text-decoration: underline;
+}
+
+/* Navigation links */
+.nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav a,
+.nav span {
+  color: rgba(0, 0, 0, 0.87); /* main text blackish */
+  text-decoration: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.nav a:hover,
+.nav span:hover {
+  text-decoration: underline;
+}
+
+/* Burger menu for small screens */
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 25px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.burger div {
+  width: 100%;
+  height: 3px;
+  background-color: rgba(0, 0, 0, 0.87); /* black bars */
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.burger.open div:nth-child(1) {
+  transform: rotate(45deg) translateY(8px);
+}
+.burger.open div:nth-child(2) {
+  opacity: 0;
+}
+.burger.open div:nth-child(3) {
+  transform: rotate(-45deg) translateY(-8px);
+}
+
+/* Hide nav on small screens */
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 1rem;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.98);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav.open {
+    display: flex;
+  }
+
+  .burger {
+    display: flex;
+  }
+}

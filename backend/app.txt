@@ -1,0 +1,5 @@
+sets up express app, middleware, and routes
+
+example - app.use(cors())
+
+app.user('/api/users', useRoutes)
