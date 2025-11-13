@@ -1,10 +1,12 @@
-// backend/routes/auth.ts -> backend/controllers/authController.ts
-import { Router } from "express";
-// import the controller functions
-import { signupController } from "../controllers/authController";
+import { Router } from 'express';
+import { signupController, loginController } from '../controllers/authController';
+import { validateAuth } from '../middleware/validateMiddleware';
+// import { protect } from '../middleware/authMiddleware';
 
 const router = Router();
 
-router.post("/signup", signupController);
+// Public routes
+router.post('/signup', validateAuth, signupController);
+router.post('/login', validateAuth, loginController);
 
 export default router;

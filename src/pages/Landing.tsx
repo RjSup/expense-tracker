@@ -8,6 +8,7 @@ import styles from './landing.module.css'
 const Landing: React.FC = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
+  
   return (
     <>
       <Header
