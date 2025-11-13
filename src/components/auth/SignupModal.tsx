@@ -25,10 +25,12 @@ export const SignupModal: React.FC<SignupModalProps> = ({onClose}) => {
               const data = await signup(email, password);
               setSuccess(data.message);
               setError('');
-            } catch (err: any) {
+            } catch (err: unknown) {
+              if (err instanceof Error) {
                 setError(err.message);
-                setSuccess('');
-                return;
+              }
+              setSuccess('');
+              return;
             }
             onClose();
         };

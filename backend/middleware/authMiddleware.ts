@@ -7,11 +7,13 @@ export interface AuthRequest extends Request {
   user?: { id: number }; // JWT payload
 }
 
-export const protect = (req: AuthRequest, res: Response, next: NextFunction) => {
+export const protect = (req: AuthRequest, res: Response, next: NextFunction): void => {
   const authHeader = req.headers.authorization;
-
-  if (!authHeader || !authHeader.startsWith('Bearer '))
-    return res.status(401).json({ message: 'Not authorized, no token' });
+  
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    res.status(401).json({ message: 'Not authorized, no token' });
+    return;
+  }
 
   const token = authHeader.split(' ')[1];
 
@@ -19,7 +21,8 @@ export const protect = (req: AuthRequest, res: Response, next: NextFunction) => 
     const decoded = jwt.verify(token, JWT_SECRET) as { id: number };
     req.user = decoded; // attach user info to request
     next();
-  } catch (err: any) {
-    res.status(401).json({ message: err.message || 'Not authorized, token failed' });
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : 'Not authorized, token failed';
+    res.status(401).json({ message });
   }
 };

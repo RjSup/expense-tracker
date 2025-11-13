@@ -29,7 +29,8 @@ export const LoginModal: React.FC<LoginModalProps> = ({onClose}) => {
 
           navigate('/dashboard');
           onClose();
-        } catch (err: any) {
+        } catch (err: unknown) {
+          if(err instanceof Error)
           setError(err.message);
           setSuccess('');
         }
