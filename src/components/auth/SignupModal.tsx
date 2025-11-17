@@ -23,7 +23,7 @@ export const SignupModal: React.FC<SignupModalProps> = ({ onClose }) => {
     setError('');
 
     try {
-      const data = await signupApi(name, email, password); // call API
+      const data = await signupApi(name, email, password);
       login(data.token); // set context
       onClose();
       navigate('/dashboard');

@@ -22,7 +22,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ onClose }) => {
     setError('');
 
     try {
-      const data = await loginApi(email, password); // call API
+      const data = await loginApi(email, password);
       login(data.token); // update context
       onClose();
       navigate('/dashboard');

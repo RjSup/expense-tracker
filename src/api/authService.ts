@@ -1,5 +1,8 @@
 // frontend/api/authService.ts -> sroutes/authService.ts
-export const signup = async (name: string, email: string, password: string) => {
+
+import type { AuthResponse, User } from "../../backend/types/user";
+
+export const signup = async (name: string, email: string, password: string): Promise<AuthResponse> => {
     const response = await fetch('http://localhost:3000/api/auth/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -17,7 +20,7 @@ export const signup = async (name: string, email: string, password: string) => {
 
 
 
-export const login = async (email: string, password: string) => {
+export const login = async (email: string, password: string): Promise<AuthResponse> => {
   const res = await fetch('http://localhost:3000/api/auth/login', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -32,7 +35,7 @@ export const login = async (email: string, password: string) => {
 };
 
 // fetch protected route
-export const fetchDashboard = async () => {
+export const fetchDashboard = async (): Promise<{ message: string, user: User}> => {
   const token = localStorage.getItem('token');
   if (!token) throw new Error('No token found');
 
