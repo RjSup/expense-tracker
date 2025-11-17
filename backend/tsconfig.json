@@ -7,6 +7,8 @@
     "esModuleInterop": true,  // import CommonJS modules nicely
     "strict": true,           // strict type checking
     "types": ["node"],        // Node.js types
-    "skipLibCheck": true      // avoid checking 3rd-party type files
+    "skipLibCheck": true ,     // avoid checking 3rd-party type files
+    "noImplicitAny": true,
+    "strictNullChecks": true
   }
 }

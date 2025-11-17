@@ -1,33 +1,51 @@
-// frontend/api/authService.ts -> backend/routes/auth.ts
-export const signup = async (email: string, password: string) => {
+// frontend/api/authService.ts -> sroutes/authService.ts
+export const signup = async (name: string, email: string, password: string) => {
     const response = await fetch('http://localhost:3000/api/auth/signup', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password }),
     });
 
     const data = await response.json();
-    if(response.ok) {
-        localStorage.setItem('token', data.token);
+    if (!response.ok) {
+        throw new Error(data.message || 'Signup failed');
     }
 
-    return data;     
-}
+    localStorage.setItem('token', data.token);
+    return data;
+};
+
+
 
 export const login = async (email: string, password: string) => {
-    const response = await fetch ('http://localhost:3000/api/auth/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-    });
+  const res = await fetch('http://localhost:3000/api/auth/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password }),
+  });
 
-    if (!response.ok) {
-        throw new Error('Failed to log in');
-    }
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message || 'Login failed');
 
-    return response.json();
-}
+  localStorage.setItem('token', data.token);
+  return data;
+};
+
+// fetch protected route
+export const fetchDashboard = async () => {
+  const token = localStorage.getItem('token');
+  if (!token) throw new Error('No token found');
+
+  const res = await fetch('http://localhost:3000/api/auth/dashboard', {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    console.error("Dashboard fetch error:", data);
+    throw new Error(data.message || 'Failed to fetch dashboard');
+  }
+
+  return data;
+};

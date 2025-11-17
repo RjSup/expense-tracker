@@ -9,6 +9,7 @@ datasource db {
 
 model User {
   id        Int       @id @default(autoincrement())
+  name      String    @default("unknown")
   email     String    @unique
   password  String
   createdAt DateTime  @default(now())
@@ -16,11 +17,12 @@ model User {
 }
 
 model Expense {
-  id        Int      @id @default(autoincrement())
-  amount    Float
+  id          Int      @id @default(autoincrement())
+  amount      Float
   description String?
-  createdAt DateTime @default(now())
-  userId    Int      // foreign key
-  user      User     @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+  userId      Int      // foreign key
+  user        User     @relation(fields: [userId], references: [id])
 }
+
 

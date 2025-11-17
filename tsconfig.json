@@ -3,5 +3,17 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+    "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "rootDir": "./",          // source folder
+    "outDir": "./dist",       // compiled JS output
+    "esModuleInterop": true,  // import CommonJS modules nicely
+    "strict": true,           // strict type checking
+    "types": ["node"],        // Node.js types
+    "skipLibCheck": true ,     // avoid checking 3rd-party type files
+    "noImplicitAny": true,
+    "strictNullChecks": true
+  }
 }

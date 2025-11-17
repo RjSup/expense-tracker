@@ -1,45 +1,51 @@
-// auth/SignupModal -> api/authService.ts
 import React, { useState } from "react";
+import { signup as signupApi } from "../../api/authService";
 import styles from './modal.module.css';
-import { signup } from "../../api/authService";
+import { useAuth } from '../../hooks/useAuth';
+import { useNavigate } from "react-router-dom";
 
-// props passed from parent component
 interface SignupModalProps {
-    onClose: () => void;
+  onClose: () => void;
 }
 
-// SignupModal component
-export const SignupModal: React.FC<SignupModalProps> = ({onClose}) => {
-        // get and set state for email, password, error, success
-        const [email, setEmail] = useState('');
-        const [password, setPassword] = useState('');
-        const [error, setError] = useState('');
-        const [success, setSuccess] = useState('');
+export const SignupModal: React.FC<SignupModalProps> = ({ onClose }) => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { login } = useAuth(); // login after signup
 
-        // when form is submitted
-        const handleSubmit = async (e: React.FormEvent) => {
-            e.preventDefault();
-            
-            try {
-              // send data to api
-              const data = await signup(email, password);
-              setSuccess(data.message);
-              setError('');
-            } catch (err: unknown) {
-              if (err instanceof Error) {
-                setError(err.message);
-              }
-              setSuccess('');
-              return;
-            }
-            onClose();
-        };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
 
-        return (
+    try {
+      const data = await signupApi(name, email, password); // call API
+      login(data.token); // set context
+      onClose();
+      navigate('/dashboard');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Signup failed');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
         <h2>Sign Up</h2>
         <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
           <input
             type="email"
             placeholder="Email"
@@ -54,14 +60,12 @@ export const SignupModal: React.FC<SignupModalProps> = ({onClose}) => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit">Create Account</button>
+          <button type="submit" disabled={loading}>
+            {loading ? "Creating..." : "Create Account"}
+          </button>
         </form>
-        <button onClick={onClose} className={styles.closeBtn}>
-          ×
-        </button>
-
+        <button onClick={onClose} className={styles.closeBtn}>×</button>
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        {success && <p style={{ color: 'green' }}>{success}</p>}
       </div>
     </div>
   );
