@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Header from "../components/layout/Header";
 import LoginModal from "../components/auth/LoginModal";
 import SignupModal from "../components/auth/SignupModal";
+import pic from '../assets/img.png'
 import styles from "./landing.module.css";
 
 const Landing: React.FC = () => {
@@ -43,7 +44,7 @@ const Landing: React.FC = () => {
           {/* RIGHT IMAGE */}
           <div className={styles.right}>
             <img
-              src="/images/dashboard-preview.png"
+              src={pic}
               alt="Ledgerly Preview"
               className={styles.image}
             />
