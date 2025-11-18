@@ -1,5 +1,4 @@
 // frontend/api/authService.ts -> sroutes/authService.ts
-
 import type { AuthResponse, User } from "../../backend/types/user";
 
 export const signup = async (name: string, email: string, password: string): Promise<AuthResponse> => {
@@ -17,8 +16,6 @@ export const signup = async (name: string, email: string, password: string): Pro
     localStorage.setItem('token', data.token);
     return data;
 };
-
-
 
 export const login = async (email: string, password: string): Promise<AuthResponse> => {
   const res = await fetch('http://localhost:3000/api/auth/login', {

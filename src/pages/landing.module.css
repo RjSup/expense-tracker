@@ -1,17 +1,99 @@
-.header {
-    background-color: rgba(250, 250, 250, 1);
-    height: 100vh;
+/* Main container with top padding for the header */
+.container {
+  padding-top: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
+/* Header wrapper ensures it doesn't break layout */
+.headerWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+/* Two-column hero */
+.content {
+  display: flex;
+  align-items: center;        
+  justify-content: flex-start; 
+  min-height: 60vh;
+  padding-top: 5rem;
+  gap: 2rem;
+}
+
+/* LEFT content */
+.left {
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-right: 2rem;
+}
+
+/* Text elements */
 .title {
-    color: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 0;
+  font-size: 2.4rem;
+  font-weight: 800;
+  margin: 0;
 }
 
-.p {
-    color: black;
+.subtitle {
+  font-size: 1.3rem;
+  color: rgb(119, 158, 203);
+  margin: 0;
+}
+
+.paragraph {
+  font-size: 1.1rem;
+  color: #444;
+  margin-top: 0.4rem;
+}
+
+/* CTA button */
+.cta {
+  background: rgb(119, 158, 203);
+  color: white;
+  padding: 0.9rem 1.8rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  width: fit-content;
+  margin-top: 0.5rem;
+  transition: 0.2s ease;
+}
+
+.cta:hover {
+  background: #8cb0d6;
+  transform: translateY(-2px);
+}
+
+/* RIGHT image */
+.right {
+  flex-shrink: 0;
+}
+
+.image {
+  width: 420px;
+  max-width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.1);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .content {
+    flex-direction: column;
     text-align: center;
+    gap: 2rem; /* vertical spacing on mobile */
+  }
+
+  .left {
+    align-items: center;
+  }
+
+  .image {
+    width: 80%;
+  }
 }

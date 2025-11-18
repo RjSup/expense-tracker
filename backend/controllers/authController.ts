@@ -61,7 +61,7 @@ export const loginController = async (req: Request, res: Response) => {
     const token = generateToken(user.id);
 
     const response: AuthResponse = {
-          message: "User created successfully",
+          message: "User logged in successfully",
           token,
           user: { id: user.id, name: user.name, email: user.email },
         };

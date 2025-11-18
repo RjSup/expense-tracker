@@ -44,9 +44,7 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick, onSignupClick, onLogoutCl
 
   return (
     <header className={styles.header}>
-      <div className={styles.logo}>
-        <Link to="/" className={styles.title}>Ledgerly</Link>
-      </div>
+      <h2 className={styles.title}>Ledgerly</h2>
 
       <NavBurger isOpen={isMenuOpen} toggleMenu={toggleMenu} />
 

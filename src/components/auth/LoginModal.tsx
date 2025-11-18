@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login as loginApi } from '../../api/authService';
+import { login } from '../../api/authService';
 import styles from './modal.module.css';
 import { useAuth } from '../../hooks/useAuth';
 
@@ -13,8 +13,8 @@ export const LoginModal: React.FC<LoginModalProps> = ({ onClose }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const { login: loginUser } = useAuth();
   const navigate = useNavigate();
-  const { login } = useAuth(); // get login from context
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,12 +22,17 @@ export const LoginModal: React.FC<LoginModalProps> = ({ onClose }) => {
     setError('');
 
     try {
-      const data = await loginApi(email, password);
-      login(data.token); // update context
+      const data = await login(email, password);
+      loginUser(data.token);
       onClose();
       navigate('/dashboard');
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Login failed');
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        console.error('Unknown error during login', err);
+        setError('An unknown error occurred');
+      }
     } finally {
       setLoading(false);
     }

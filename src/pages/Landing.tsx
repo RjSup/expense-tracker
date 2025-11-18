@@ -1,30 +1,60 @@
 import React, { useState } from "react";
 import Header from "../components/layout/Header";
-// import { EchoInput } from "../components/EchoInput";
 import LoginModal from "../components/auth/LoginModal";
 import SignupModal from "../components/auth/SignupModal";
-import styles from './landing.module.css'
+import styles from "./landing.module.css";
 
 const Landing: React.FC = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
-  
+
   return (
     <>
-      <Header
-        onLoginClick={() => setShowLogin(true)}
-        onSignupClick={() => setShowSignup(true)}
-      />
-      <main className={styles.header}>
-        <h1 className={styles.title}>Welcome to Ledgerly</h1>
-        <p className={styles.p}>Your personal expense tracker.</p>
-        {/* <EchoInput /> */}
+      {/* Main landing */}
+      <main className={styles.container}>
+
+        {/* HEADER */}
+        <div className={styles.headerWrapper}>
+          <Header
+            onLoginClick={() => setShowLogin(true)}
+            onSignupClick={() => setShowSignup(true)}
+          />
+        </div>
+
+        {/* HERO SECTION */}
+        <div className={styles.content}>
+          {/* LEFT TEXT */}
+          <div className={styles.left}>
+            <h1 className={styles.title}>Manage Your Money Smarter</h1>
+            <h2 className={styles.subtitle}>Track. Analyze. Improve.</h2>
+            <p className={styles.paragraph}>
+              Ledgerly helps you stay in full control of your finances with
+              simple tools designed for clarity and peace of mind.
+            </p>
+
+            <button
+              className={styles.cta}
+              onClick={() => setShowSignup(true)}
+            >
+              Get Started
+            </button>
+          </div>
+
+          {/* RIGHT IMAGE */}
+          <div className={styles.right}>
+            <img
+              src="/images/dashboard-preview.png"
+              alt="Ledgerly Preview"
+              className={styles.image}
+            />
+          </div>
+        </div>
       </main>
 
       {showLogin && <LoginModal onClose={() => setShowLogin(false)} />}
       {showSignup && <SignupModal onClose={() => setShowSignup(false)} />}
     </>
   );
-}
+};
 
 export default Landing;

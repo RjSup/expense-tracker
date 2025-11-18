@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { signup as signupApi } from "../../api/authService";
+import { signup } from "../../api/authService";
 import styles from './modal.module.css';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,7 @@ export const SignupModal: React.FC<SignupModalProps> = ({ onClose }) => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { login } = useAuth(); // login after signup
+  const { login: loginUser } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,12 +23,17 @@ export const SignupModal: React.FC<SignupModalProps> = ({ onClose }) => {
     setError('');
 
     try {
-      const data = await signupApi(name, email, password);
-      login(data.token); // set context
+      const data = await signup(name, email, password);
+      loginUser(data.token);
       onClose();
       navigate('/dashboard');
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Signup failed');
+      if(err instanceof Error) {
+        setError(err.message);
+      } else {
+        console.error('Unknown error during signup', err);
+        setError('Signup failed');
+      }
     } finally {
       setLoading(false);
     }

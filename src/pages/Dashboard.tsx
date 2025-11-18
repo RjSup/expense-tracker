@@ -5,7 +5,7 @@ import SignupModal from "../components/auth/SignupModal";
 import Header from "../components/layout/Header";
 import { fetchDashboard } from "../api/authService";
 
-import styles from './landing.module.css'
+import styles from './dashboard.module.css'
 
 const Dashboard: React.FC = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -41,9 +41,11 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
-      <Header onLoginClick={() => setShowLogin(true)} onSignupClick={() => setShowSignup(true)} />
-
       <main className={styles.header}>
+        <Header
+        onLoginClick={() => setShowLogin(true)}
+        onSignupClick={() => setShowSignup(true)}
+        />
         <h1>Dashboard Page</h1>
       </main>
 
